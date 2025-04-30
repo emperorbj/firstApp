@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function Notify() {
+const blogs = () => {
   return (
     <View>
-      <Text>Notify me here</Text>
+      <Text>blogs</Text>
     </View>
   )
 }
+
+export default blogs

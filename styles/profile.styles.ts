@@ -1,241 +1,177 @@
-import { COLORS } from "../constants/themes";
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import COLORS from "../constants/constants";
 
-const { width, height } = Dimensions.get("window");
-
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+    padding: 16,
+    paddingBottom: 0,
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 0.5,
-    borderBottomColor: COLORS.surface,
+    backgroundColor: COLORS.background,
   },
-  headerLeft: {
+  profileHeader: {
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: COLORS.cardBackground,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  profileImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginRight: 16,
+  },
+  profileInfo: {
+    flex: 1,
   },
   username: {
     fontSize: 20,
     fontWeight: "700",
+    color: COLORS.textPrimary,
+    marginBottom: 4,
+  },
+  email: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    marginBottom: 4,
+  },
+  memberSince: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+  },
+  logoutButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 12,
+    padding: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 24,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  logoutText: {
     color: COLORS.white,
+    fontWeight: "600",
+    marginLeft: 8,
   },
-  headerRight: {
+  booksHeader: {
     flexDirection: "row",
-    gap: 16,
-  },
-  headerIcon: {
-    padding: 4,
-  },
-  profileInfo: {
-    padding: 16,
-  },
-  avatarAndStats: {
-    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 16,
   },
-  avatarContainer: {
-    marginRight: 32,
-  },
-  avatar: {
-    width: 86,
-    height: 86,
-    borderRadius: 43,
-    borderWidth: 2,
-    borderColor: COLORS.surface,
-  },
-  statsContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  statItem: {
-    alignItems: "center",
-  },
-  statNumber: {
-    fontSize: 17,
+  booksTitle: {
+    fontSize: 18,
     fontWeight: "700",
-    color: COLORS.white,
-    marginBottom: 4,
+    color: COLORS.textPrimary,
   },
-  statLabel: {
-    fontSize: 13,
-    color: COLORS.grey,
-  },
-
-  name: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: COLORS.white,
-    marginBottom: 4,
-  },
-  bio: {
+  booksCount: {
     fontSize: 14,
-    color: COLORS.white,
-    lineHeight: 20,
+    color: COLORS.textSecondary,
   },
-  actionButtons: {
+  booksList: {
+    paddingBottom: 20,
+  },
+  bookItem: {
     flexDirection: "row",
-    gap: 8,
-    marginTop: 8,
+    backgroundColor: COLORS.cardBackground,
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 12,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
-  editButton: {
+  bookImage: {
+    width: 70,
+    height: 100,
+    borderRadius: 8,
+    marginRight: 12,
+  },
+  bookInfo: {
     flex: 1,
-    backgroundColor: COLORS.surface,
-    padding: 8,
-    borderRadius: 8,
-    alignItems: "center",
+    justifyContent: "space-between",
   },
-  editButtonText: {
-    color: COLORS.white,
+  bookTitle: {
+    fontSize: 16,
     fontWeight: "600",
-    fontSize: 14,
+    color: COLORS.textPrimary,
+    marginBottom: 4,
   },
-  shareButton: {
-    backgroundColor: COLORS.surface,
+  ratingContainer: {
+    flexDirection: "row",
+    marginBottom: 4,
+  },
+  bookCaption: {
+    fontSize: 14,
+    color: COLORS.textDark,
+    marginBottom: 4,
+    flex: 1,
+  },
+  bookDate: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+  },
+  deleteButton: {
     padding: 8,
-    borderRadius: 8,
-    aspectRatio: 1,
-    alignItems: "center",
     justifyContent: "center",
   },
-  gridItem: {
-    flex: 1 / 3,
-    aspectRatio: 1,
-    padding: 1,
-  },
-  gridImage: {
-    flex: 1,
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "flex-end",
-  },
-  modalContent: {
-    backgroundColor: COLORS.background,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: 20,
-    minHeight: 400,
-  },
-  modalHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  emptyContainer: {
     alignItems: "center",
-    marginBottom: 20,
-  },
-  modalTitle: {
-    color: COLORS.white,
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  inputLabel: {
-    color: COLORS.grey,
-    marginBottom: 8,
-    fontSize: 14,
-  },
-  input: {
-    backgroundColor: COLORS.surface,
-    borderRadius: 8,
-    padding: 12,
-    color: COLORS.white,
-    fontSize: 16,
-  },
-  bioInput: {
-    height: 100,
-    textAlignVertical: "top",
-  },
-  saveButton: {
-    backgroundColor: COLORS.primary,
-    padding: 16,
-    borderRadius: 8,
-    alignItems: "center",
+    justifyContent: "center",
+    padding: 40,
     marginTop: 20,
   },
-  saveButtonText: {
-    color: COLORS.background,
+  emptyText: {
     fontSize: 16,
     fontWeight: "600",
-  },
-  modalBackdrop: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.9)",
-    justifyContent: "center",
-  },
-  postDetailContainer: {
-    backgroundColor: COLORS.background,
-    maxHeight: height * 0.9,
-  },
-  postDetailHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: 12,
-    borderBottomWidth: 0.5,
-    borderBottomColor: COLORS.surface,
-  },
-  postDetailImage: {
-    width: width,
-    height: width,
-  },
-  followButton: {
-    backgroundColor: COLORS.primary,
-    paddingHorizontal: 24,
-    paddingVertical: 8,
-    borderRadius: 8,
+    color: COLORS.textPrimary,
     marginTop: 16,
-  },
-  followingButton: {
-    backgroundColor: COLORS.surface,
-    borderWidth: 1,
-    borderColor: COLORS.primary,
-  },
-  followButtonText: {
-    color: COLORS.white,
-    fontSize: 14,
-    fontWeight: "600",
+    marginBottom: 20,
     textAlign: "center",
   },
-  followingButtonText: {
-    color: COLORS.white,
-    textAlign: "center",
-  },
-  noPostsContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 48,
-    gap: 12,
-    flex: 1,
-  },
-  noPostsText: {
-    color: COLORS.grey,
-    fontSize: 16,
-  },
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  postsGrid: {
-    flex: 1,
+  addButton: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.primary,
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "600",
+  addButtonText: {
     color: COLORS.white,
+    fontWeight: "600",
+    fontSize: 14,
+    marginLeft: 8,
   },
 });
+
+export default styles;

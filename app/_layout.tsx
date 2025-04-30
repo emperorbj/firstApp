@@ -1,32 +1,61 @@
 
-import { Stack } from "expo-router";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-// import { ClerkProvider, ClerkLoaded, useAuth } from '@clerk/clerk-expo'
-import { tokenCache } from "@/cache";
+import SafeScreen from "../components/SafeScreen"; // corrected path
+import { Stack, useSegments, useRouter, Slot } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useAuthStore } from "@/store/authStore";
+import { useEffect, useState } from "react";
+import { AuthState } from "@/types/data";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import SplashScreen from "../components/SplashScreen";
 
-
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
-
-if (!publishableKey) {
-  throw new Error(
-    'Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env',
-  )
-}
-
+const queryClient = new QueryClient();
 
 
 export default function RootLayout() {
-  return (
+  const { checkAuth, user, token } = useAuthStore() as AuthState;
+  const router = useRouter();
+  const segment = useSegments();
 
-    // <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
-    //   <ClerkLoaded>
-        <SafeAreaProvider>
-          <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-            <Stack
-              screenOptions={{ headerShown: false }} />
-          </SafeAreaView>
-        </SafeAreaProvider>
-    //   </ClerkLoaded>
-    // </ClerkProvider>
-  )
+  const [loading, setLoading] = useState(true); 
+
+  useEffect(() => {
+    const initAuth = async () => {
+      await checkAuth(); // <- wait for auth check
+      setLoading(false); // <- finished loading
+    };
+    initAuth();
+  }, []);
+
+  useEffect(() => {
+    if (loading) return; // don't redirect during loading
+
+    const isAuthScreen = segment[0] === "(auth)";
+    const isSigned = user && token;
+
+    if (!isAuthScreen && !isSigned) {
+      router.replace("/(auth)/login");
+    } else if (isAuthScreen && isSigned) {
+      setTimeout(()=>{
+      router.replace("/(tabs)");
+      },5000)
+      
+    }
+  }, [user, segment, token, loading]);
+
+
+  return     (<SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+  <SafeScreen>
+    {/* The main content (always render Slot) */}
+    <Slot />
+
+    {/* Splash screen over it */}
+    {loading && (
+      <SplashScreen/>
+    )}
+  </SafeScreen>
+  </QueryClientProvider>
+</SafeAreaProvider>
+);
 }
+

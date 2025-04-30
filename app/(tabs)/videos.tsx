@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function create() {
+const videos = () => {
   return (
     <View>
-      <Text>create</Text>
+      <Text>videos</Text>
     </View>
   )
 }
+
+export default videos
